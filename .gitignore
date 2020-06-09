@@ -3,5 +3,5 @@
 /ImgChangeServer/workbench/results/
 /ImgChangeServer/workbench/vgg19_weight/*
 /ImgChangeServer/dataset/
-/ImgChangeApp/node_modules
+/ImgChangeApp/node_modules/
 /.idea/
