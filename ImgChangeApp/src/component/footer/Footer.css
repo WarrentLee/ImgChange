@@ -1,0 +1,18 @@
+.footer{
+    width: 100%;
+    bottom: 0;
+    height: 55px;
+    line-height: 55px;
+    padding-left: 160px;
+    background-color: #ffffff;
+    position:fixed;
+}
+.footer a{
+    color:#969696;
+    margin-right: 8px;
+    margin-left: 8px;
+}
+
+.footer em {
+    color: #969696
+}

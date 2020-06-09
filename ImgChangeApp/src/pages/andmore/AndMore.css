@@ -1,0 +1,33 @@
+.andmore-essay .part-essay {
+    background: #fff;
+    box-shadow: 2px 8px 16px 5px #cccccc;
+    border-radius: 12px;
+    box-sizing: border-box;
+    margin: 2% 18.5% auto 18.5%;
+    padding: 40px 40px 24px 40px;
+    position: relative;
+}
+
+.detail-title h1 {
+    font-family: 'SourceHanSerif-2040446c601f2cf' !important;
+}
+.andmore-essay span{
+    font-size: 40px;
+}
+
+.andmore-essay .part-essay .detail-content-wrap .detail-content .cl-preview-section {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, STHeiti, "Microsoft Yahei", sans-serif;
+    font-size: 16px;
+    color: #1c1f21;
+    word-wrap: break-word;
+    background-color: #fff;
+    line-height: 32px;
+}
+
+.andmore-essay .part-essay .detail-content-wrap .detail-content p img {
+    width: auto;
+    height: auto;
+    margin: 10px auto 14px;
+    max-width: 100% !important;
+    transform: none !important;
+}

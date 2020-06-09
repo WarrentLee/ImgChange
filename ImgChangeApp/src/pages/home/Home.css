@@ -1,0 +1,43 @@
+#home-page{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    max-width: 1400px;
+    margin: auto;
+    margin-top: 10%;
+}
+#home-page .headline {
+    flex-grow: 1;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: center;
+}
+#home-page .headline .point {
+    cursor: pointer;
+    position: relative;
+    flex-grow: 0;
+    margin: 10px;
+    width: 250px;
+    background-color: white;
+}
+#home-page .headline .point img {
+    width: 250px;
+    height: 179px;
+    border-radius: 2px;
+    box-shadow: 2px 2px 8px 2px #dddddd;
+}
+.index_page__slideMask2 {
+    position: relative;
+}
+
+.index_page__slidImag1{
+    position: absolute;
+    top:0;
+    width: 100%;
+}
+h2{
+    text-align: center;
+}
+#history{
+    /* display: none; */
+}
