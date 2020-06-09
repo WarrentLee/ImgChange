@@ -1,6 +1,6 @@
-/ImgChangeServer/wockbench/checkpoint/model/
-/ImgChangeServer/wockbench/result/
-/ImgChangeServer/wockbench/results/
-/ImgChangeServer/wockbench/vgg19_weight/
+/ImgChangeServer/workbench/checkpoint/model/
+/ImgChangeServer/workbench/result/
+/ImgChangeServer/workbench/results/
+/ImgChangeServer/workbench/vgg19_weight/*
 /ImgChangeServer/dataset/
-/.idea
+/.idea/
