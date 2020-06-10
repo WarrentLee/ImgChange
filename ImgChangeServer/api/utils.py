@@ -12,7 +12,7 @@ from ImgChangeServer.config import Config
 def create_app(name):
     app = Flask(name, template_folder='../templates')
     # app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///' + os.path.join(app.root_path, 'data.db'))
-    print("Database Directory:",  os.getenv('DATABASE_URL'))
+    print("Database Directory:", os.getenv('DATABASE_URL'))
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///' + Config.DATABASE_DIRECTORY)
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.secret_key = "asfnsdjnsdlflasdkc553d3s1"
@@ -21,14 +21,11 @@ def create_app(name):
     return app
 
 
-def image_save(image0, path):
-    image = image0.read()
-    image = io.BytesIO(image)
-    pil_image = Image.open(image)
-    # pil_image = Image.open(io.BytesIO(image.read()))
+def image_save(image, path):
+    pil_image = Image.open(io.BytesIO(image.read()))
     image_model = ImageModel(
         user_id=current_user.id,
-        file_name=image0.filename,
+        file_name=image.filename,
         width=pil_image.size[0],
         height=pil_image.size[1],
         img_uri=path
@@ -43,7 +40,6 @@ def image_save(image0, path):
 
 
 def pil_image_save(pil_image, path, filename):
-
     image_model = ImageModel(
         user_id=current_user.id,
         file_name=filename,
@@ -54,6 +50,5 @@ def pil_image_save(pil_image, path, filename):
     image_model.save()
     pil_image.save(path)
     return image_model
-
 
 
