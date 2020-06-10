@@ -1,7 +1,4 @@
-/ImgChangeServer/workbench/checkpoint/model/
-/ImgChangeServer/workbench/result/
-/ImgChangeServer/workbench/results/
-/ImgChangeServer/workbench/vgg19_weight/*
 /ImgChangeServer/dataset/
 /ImgChangeApp/node_modules/
 /.idea/
+/ImgChangeServer/database/data.db

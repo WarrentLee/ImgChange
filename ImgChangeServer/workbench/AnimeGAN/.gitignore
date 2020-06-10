@@ -1,0 +1,8 @@
+# Ignore in this directory
+checkpoint/model/
+result/
+results/
+vgg19_weight/*
+
+# Except this file
+!.gitignore

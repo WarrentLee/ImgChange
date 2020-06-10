@@ -7,12 +7,12 @@ from flask_restplus import Namespace, Resource, reqparse
 from werkzeug.datastructures import FileStorage
 from werkzeug.security import generate_password_hash
 
-from ImgChangeServer.api.utils import pil_image_save, image_save
-from ImgChangeServer.config import Config
-from ImgChangeServer.database.model import ImageModel
+from ..api.utils import pil_image_save, image_save
+from ..config import Config
+from ..database.model import ImageModel
 import os, io
 from PIL import Image
-from ImgChangeServer.workbench.deal import deal
+from ..workbench.AnimeGAN.deal import deal
 
 api = Namespace('change', description='Style Change related operations')
 
@@ -32,7 +32,7 @@ class Change(Resource):
         args = image_change.parse_args()
         as_attachment = args['asAttachment']
         image = args['image']
-        model_dir = os.path.abspath(os.path.dirname(os.getcwd())) + "/workbench/checkpoint/model"
+        model_dir = os.path.abspath(os.path.dirname(os.getcwd())) + "/workbench/AnimeGAN/checkpoint/model"
         pil_image = Image.open(image)
         cv_image = deal(model_dir, pil_image)
         # cv2.imshow("OpenCV", cv_image)
@@ -49,15 +49,15 @@ class Change(Resource):
                     if not os.path.exists(directory):
                         os.makedirs(directory)
                     print(type(image))
-                    pil_image_save(pil_image, path, image.filename)
+                    pil_image_save(changed_img, path, image.filename)
                     store = True
             image_io = io.BytesIO()
             changed_img.save(image_io, "JPEG", quality=90)
             image_io.seek(0)
-            return send_file(image_io, attachment_filename="changed_image", as_attachment=as_attachment)
+            return send_file(image_io, attachment_filename="changed_image_" + image.filename, as_attachment=as_attachment)
         return {'success': False, 'message': 'Have not generated an image'}
 
 
 if __name__ == "__main__":
-    model_dir = os.path.abspath(os.path.dirname(os.getcwd())) + "/workbench/checkpoint"
+    model_dir = os.path.abspath(os.path.dirname(os.getcwd())) + "/workbench/AnimeGAN/checkpoint"
     os.chdir(model_dir)

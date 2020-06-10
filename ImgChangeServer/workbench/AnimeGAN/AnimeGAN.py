@@ -1,11 +1,11 @@
-from ImgChangeServer.workbench.ops import *
-from ImgChangeServer.workbench.utils import *
+from .ops import *
+from .utils import *
 from glob import glob
 import time
 import numpy as np
-from ImgChangeServer.workbench.net import generator
-from ImgChangeServer.workbench.net.discriminator import D_net
-from ImgChangeServer.workbench.data_loader import ImageGenerator
+from .net import generator
+from .net.discriminator import D_net
+from .data_loader import ImageGenerator
 
 class AnimeGAN(object) :
     def __init__(self, sess, args):

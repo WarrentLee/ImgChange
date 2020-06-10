@@ -55,7 +55,7 @@ class Images(Resource):
             "user_id": current_user.id,
             "total": total,
             "pages": pages,
-            "page": page,
+            "page": page+1,
             "per_page": per_page,
             "images": img_ids
         }

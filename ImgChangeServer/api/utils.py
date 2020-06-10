@@ -53,7 +53,6 @@ def pil_image_save(pil_image, path, filename):
     )
     image_model.save()
     pil_image.save(path)
-    pil_image.close()
     return image_model
 
 

@@ -1,6 +1,6 @@
-from ImgChangeServer.workbench.AnimeGAN import AnimeGAN
+from .AnimeGAN import AnimeGAN
 import argparse
-from ImgChangeServer.workbench.utils import *
+from .utils import *
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
