@@ -37,5 +37,5 @@ def process(model_dir, img_file, scale=1.0):
 
 
 if __name__ == '__main__':
-    process('pretrained/warpgan_pretrained','data/example/9.jpg',num_styles=5)
+    process('pretrained/warpgan_pretrained','data/example/9.jpg')
 
