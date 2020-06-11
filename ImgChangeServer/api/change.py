@@ -56,7 +56,7 @@ class AnimeGAN(Resource):
             store = False
             # save image if logined
             if current_user.is_authenticated:
-                directory = os.path.join(Config.DATASET_DIRECTORY, current_user.username + '/style_changed')
+                directory = os.path.join(Config.DATASET_DIRECTORY, current_user.username + '/style')
                 filename = generate_password_hash(str(randint(0, 9999)), method='sha256')[7:] + image.filename
                 path = os.path.join(directory, filename)
                 if not os.path.exists(path):
@@ -95,7 +95,7 @@ class FaceGAN(Resource):
         store = False
         # save image if logined
         if current_user.is_authenticated:
-            directory = os.path.join(Config.DATASET_DIRECTORY, current_user.username + '/face_changed')
+            directory = os.path.join(Config.DATASET_DIRECTORY, current_user.username + '/face')
             filename = generate_password_hash(str(randint(0, 9999)), method='sha256')[7:] + image_file.filename
             path = os.path.join(directory, filename)
             if not os.path.exists(path):
