@@ -12,16 +12,17 @@ def process(model_dir, img_file, scale=1.0):
     num_styles = 1
     network = WarpGAN()
     network.load_model(model_dir)
-    try:
-       img = misc.imread(img_file, mode='RGB')
-    # img = imageio.imread(args.input, format='RGB')
-    except:
-        print("Can't read image!")
-        return None
+    # try:
+    #    img = misc.imread(img_file, mode='RGB')
+    # # img = imageio.imread(args.input, format='RGB')
+    # except:
+    #     print("Can't read image!")
+    #     return None
+    img = misc.imread(img_file, mode='RGB')
 
     img = detect_align(img)
     if img is None:
-        print("Can't detect a face!")
+        print("Can not detect a face")
         return None
     img = (img - 127.5) / 128.0
 

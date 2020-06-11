@@ -21,14 +21,15 @@ def create_app(name):
     return app
 
 
-def image_save(image, path):
+def image_save(image, path, category):
     pil_image = Image.open(io.BytesIO(image.read()))
     image_model = ImageModel(
         user_id=current_user.id,
         file_name=image.filename,
         width=pil_image.size[0],
         height=pil_image.size[1],
-        img_uri=path
+        img_uri=path,
+        category=category
     )
 
     image_model.save()
@@ -39,13 +40,14 @@ def image_save(image, path):
     return image_model
 
 
-def pil_image_save(pil_image, path, filename):
+def pil_image_save(pil_image, path, filename, category):
     image_model = ImageModel(
         user_id=current_user.id,
         file_name=filename,
         width=pil_image.size[0],
         height=pil_image.size[1],
-        img_uri=path
+        img_uri=path,
+        category=category
     )
     image_model.save()
     pil_image.save(path)

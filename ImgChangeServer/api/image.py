@@ -1,3 +1,4 @@
+import PIL
 from flask import send_file
 from flask_login import login_required, current_user
 from flask_restplus import Namespace, Resource, reqparse
@@ -13,8 +14,9 @@ from PIL import Image
 api = Namespace('image', description='Image related operations')
 
 image_all = reqparse.RequestParser()
-image_all.add_argument('page', default=1, type=int)
-image_all.add_argument('per_page', default=50, type=int, required=False)
+image_all.add_argument('page', default=1, type=int, help='Page number')
+image_all.add_argument('per_page', default=50, type=int, required=False, help='Images per page')
+image_all.add_argument('category', choices=["origin", "style", "face"], required=False)
 
 image_upload = reqparse.RequestParser()
 image_upload.add_argument('image', location='files',
@@ -40,8 +42,21 @@ class Images(Resource):
         args = image_all.parse_args()
         per_page = args['per_page']
         page = args['page'] - 1
-
-        images = current_user.images
+        category = args['category']
+        if category:
+            if "origin" == category:
+                images = [image for image in current_user.images if image.category == "origin"]
+                # images = list(filter(lambda image: image.category == "origin", current_user.images))
+            elif "style" == category:
+                images = [image for image in current_user.images if image.category == "style"]
+                # images = list(filter(lambda image: image.category == "style", current_user.images))
+            elif "face" == category:
+                images = [image for image in current_user.images if image.category == "face"]
+                # images = list(filter(lambda image: image.category == "face", current_user.images))
+            else:
+                return {"success": False, "message": "Illegal category"}, 400
+        else:
+            images = current_user.images
         total = len(images)
         pages = int(total / per_page) + 1
         if (page + 1) * per_page < total:
@@ -88,8 +103,11 @@ class Images(Resource):
             os.makedirs(directory)
         print(path)
         print(type(image))
-        image_model = image_save(args['image'], path)
-
+        try:
+            image_model = image_save(args['image'], path, "origin")
+        except PIL.UnidentifiedImageError:
+            return {"success": False,
+                    "message": "Illegal file format"}
         return {'success': True,
                 "user_id": current_user.id,
                 "file_name": filename,
@@ -156,6 +174,6 @@ class ImageId(Resource):
             # os.unlink(path)
             return {"success": True}
         else:
-            return{'no such image:(%s)%s' % (current_user.username, image_id)}  # 则返回文件不存在
+            return{'no such image:(%s)%s' % (current_user.username, image_id)}, 400  # 则返回文件不存在
 
 

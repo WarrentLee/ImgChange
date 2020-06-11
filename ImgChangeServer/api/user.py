@@ -18,16 +18,15 @@ login.add_argument('password', required=True, location='form')
 login.add_argument('username', required=True, location='form')
 
 set_password = reqparse.RequestParser()
-set_password.add_argument('password', required=True, location='json')
-set_password.add_argument('new_password', required=True, location='json')
-
+set_password.add_argument('old_password', required=True, location='form')
+set_password.add_argument('new_password', required=True, location='form')
 
 
 @api.route('/login')
 class UserLogin(Resource):
     @api.expect(login)
     def post(self):
-        """ Logs user in """
+        """ Log user in """
         args = login.parse_args()
         username = args.get('username')
         user = UserModel.query.filter(UserModel.username == username).first()
@@ -39,7 +38,7 @@ class UserLogin(Resource):
             login_user(user)
         # if user.password == args.get('password'):
         #     login_user(user)
-            return {'success': True, 'user': current_user.id}
+            return {'success': True, 'user': current_user.username}
             # if current_user.is_authenticated:
             #     return {'success': True, "user": current_user.username}
         return {'success': False, 'message': 'Could not authenticate user'}, 400
@@ -49,6 +48,7 @@ class UserLogin(Resource):
 class UserLogout(Resource):
     @login_required
     def get(self):
+        """ Log user out """
         logout_user()
         return {'success': True}
 
@@ -57,7 +57,7 @@ class UserLogout(Resource):
 class UserRegister(Resource):
     @api.expect(register)
     def post(self):
-        """ Creates user """
+        """ Create user """
 
         # users = User.objects.count()
 
@@ -76,6 +76,20 @@ class UserRegister(Resource):
         login_user(user)
 
         return {'success': True, 'user': current_user.username}
+
+
+@api.route('/password')
+class AlterPassword(Resource):
+    @api.expect(set_password)
+    @login_required
+    def post(self):
+        """Alter user password"""
+        args = set_password.parse_args()
+        if check_password_hash(current_user.password, args.get('old_password')):
+            current_user.set_password(generate_password_hash(args.get('new_password'), method='sha256'))
+            return {"success": True, "user": current_user.username}
+        return {"success": False, "message": 'Could not authenticate password'}
+
 
 # if __name__ == '__main__':          #建立项目时选择了flask项目，此处不会直接执行这个py文件，而是递交给flask框架去执行
 #     app.run(host="0.0.0.0")

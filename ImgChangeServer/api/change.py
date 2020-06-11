@@ -2,6 +2,7 @@ import io
 import os
 from random import randint
 
+import PIL
 from PIL import Image
 from flask import send_file
 from flask_login import current_user
@@ -42,7 +43,11 @@ class AnimeGAN(Resource):
         as_attachment = args['asAttachment']
         image = args['image']
         model_dir = os.path.abspath(os.path.dirname(os.getcwd())) + "/workbench/AnimeGAN/checkpoint/model"
-        pil_image = Image.open(image)
+        try:
+            pil_image = Image.open(image)
+        except PIL.UnidentifiedImageError:
+            return {"success": False,
+                    "message": "Illegal file format"}, 400
         cv_image = deal(model_dir, pil_image)
         # cv2.imshow("OpenCV", cv_image)
         if cv_image is not None:
@@ -57,13 +62,13 @@ class AnimeGAN(Resource):
                 if not os.path.exists(path):
                     if not os.path.exists(directory):
                         os.makedirs(directory)
-                    pil_image_save(changed_img, path, image.filename)
+                    pil_image_save(changed_img, path, image.filename, "style")
                     store = True
             image_io = io.BytesIO()
             changed_img.save(image_io, "JPEG", quality=90)
             image_io.seek(0)
-            return send_file(image_io, attachment_filename="changed_style_" + image.filename, as_attachment=as_attachment)
-        return {'success': False, 'message': 'Have not generated an image'}
+            return send_file(image_io, attachment_filename="changed_style_" + image.filename.split('.', 1)[0]+".jpg", as_attachment=as_attachment)
+        return {'success': False, 'message': 'Have not generated an image'}, 400
 
 @api.route('/face')
 class FaceGAN(Resource):
@@ -75,9 +80,15 @@ class FaceGAN(Resource):
         image_file = args['image']
         scale = args['scale']
         model_dir = os.path.abspath(os.path.dirname(os.getcwd())) + "/workbench/WarpGAN/pretrained/warpgan_pretrained"
-        face_img = process(model_dir, image_file, scale=scale)
+        try:
+            face_img = process(model_dir, image_file, scale=scale)
+        except PIL.UnidentifiedImageError:
+            print("Can not read image")
+            return {"success": False,
+                    "message": "Illegal file format"}, 400
         if face_img is None:
-            return {'success': False, 'message': "Illegal file or can't detect a face"}
+            return {'success': False,
+                    'message': "Could not detect a face"}, 202
 
         image_io = io.BytesIO()
 
@@ -90,14 +101,14 @@ class FaceGAN(Resource):
             if not os.path.exists(path):
                 if not os.path.exists(directory):
                     os.makedirs(directory)
-                pil_image_save(face_img, path, image_file.filename)
+                pil_image_save(face_img, path, image_file.filename, "face")
                 store = True
 
         # face_img.show()
         face_img.save(image_io, "JPEG", quality=90)
         face_img.close()
         image_io.seek(0)
-        return send_file(image_io, attachment_filename="changed_face_" + image_file.filename, as_attachment=as_attachment)
+        return send_file(image_io, attachment_filename="changed_face_" + image_file.filename.split('.', 1)[0]+".jpg", as_attachment=as_attachment)
 
 
 if __name__ == "__main__":

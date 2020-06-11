@@ -16,13 +16,15 @@ class ImageModel(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     width = db.Column(db.Integer)
     height = db.Column(db.Integer)
+    category = db.Column(db.Enum("origin", "style", "face"), nullable=False)
 
-    def __init__(self, img_uri=None, user_id=None, height=None, width=None, file_name=None):
+    def __init__(self, img_uri=None, user_id=None, height=None, width=None, file_name=None, category=None):
         self.img_uri = img_uri
         self.user_id = user_id
         self.width = width
         self.height = height
         self.file_name = file_name
+        self.category = category
 
     def save(self):
         db.session.add(self)
@@ -51,6 +53,11 @@ class UserModel(db.Model, UserMixin):
         self.password = password
 
     def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def set_password(self, password):
+        self.password = password
         db.session.add(self)
         db.session.commit()
 
