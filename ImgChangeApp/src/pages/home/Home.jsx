@@ -1,19 +1,33 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
 import './Home.css';
-import Section from './Section'
 import first_img_before from '../../assets/images/first_img_before.jpg'
 import first_img_after from '../../assets/images/first_img_after.jpg'
 import second_img_before from '../../assets/images/second_img_before.jpg'
 import second_img_after from '../../assets/images/second_img_after.jpg'
 import third_img from '../../assets/images/third_img.jpg'
-export default class Home extends Component{
-   render(){
+
+class Home extends Component {
+   render() {
       return (
          <div id="home-page">
             <div className="headline">
                <div className="point">
-                  <Link to="upload">
+                  <Link to="uploadface">
+                     <img src={second_img_before} alt="风格二" />
+                     <div className="index_page__slidImag1">
+                        <div className="index_page__slideMask2">
+                           <img src={second_img_after} alt="风格二" />
+                        </div>
+                     </div>
+                     <div className="caption">
+                        <h2>人脸漫画化</h2>
+                     </div>
+                  </Link>
+               </div>
+               <div className="point">
+                  <Link to="uploadstyle">
                      <div id="section-point1">
                         <img src={first_img_before} alt="风格一" />
                         <div className="index_page__slidImag1">
@@ -23,28 +37,15 @@ export default class Home extends Component{
                         </div>
                      </div>
                      <div className="caption">
-                        <h2>非人像转漫画</h2>
-                     </div>
-                  </Link>
-               </div>
-               <div className="point">
-                  <Link to="upload">
-                     <img src={second_img_before} alt="风格二" />
-                     <div className="index_page__slidImag1">
-                        <div className="index_page__slideMask2">
-                           <img src={second_img_after} alt="风格二" />
-                        </div>
-                     </div>
-                     <div className="caption">
-                        <h2>人像转漫画</h2>
+                        <h2>风景风格转移</h2>
                      </div>
                   </Link>
                </div>
                <div className="point">
                   <Link to="upload">
                      <img src={third_img} alt="上传图片" />
-                        <div className="caption">
-                           <h2>上传图片</h2>
+                     <div className="caption">
+                        <h2>上传图片</h2>
                      </div>
                   </Link>
                </div>
@@ -57,7 +58,7 @@ export default class Home extends Component{
                         </div>
                      </div>
                      <div className="caption">
-                        <h2>用户历史</h2>
+                        <h2>用户中心</h2>
                      </div>
                   </Link>
                </div>
@@ -69,3 +70,7 @@ export default class Home extends Component{
       )
    }
 }
+
+export default connect(
+   state => ({ user: state.user }),
+)(Home)

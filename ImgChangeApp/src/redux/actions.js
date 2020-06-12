@@ -2,42 +2,117 @@ import {
     CHOOSE_TYPE,
     RECEIVE_USER,
     RESET_USER,
-    SHOW_ERROR_MSG
+    SHOW_ERROR_MSG,
+    STYLE_IMG,
+    RESET_STYLE_IMG,
+    FACE_IMG,
+    RESET_FACE_IMG
 } from './action-types'
-import {reqLogin} from '../api'
+import {
+    reqLogin,
+    reqRegister,
+    reqLogout,
+    reqImg1,
+    reqImg2,
+    reqUserImg,
+    reqImgById
+} from '../api'
 import storageUtils from '../utils/storageUtils'
-
-// function getBase64(file) {
-//     return new Promise((resolve, reject) => {
-//         const reader = new FileReader();
-//         reader.readAsDataURL(file);
-//         reader.onload = () => resolve(reader.result);
-//         reader.onerror = error => reject(error);
-//     })
-// }
 
 
 export const receiveUser = (user)=>({type:RECEIVE_USER,user});
 
-export const logout = ()=>{
-    storageUtils.removeUser();
+
+
+export const logoutUser = ()=>{
     return {type:RESET_USER};
+}
+
+export const logout = () => {
+    storageUtils.removeUser();
+    return async dispatch=>{
+        await reqLogout();
+        dispatch(logoutUser());
+    }
 }
 
 export const showErrorMsg = (errorMsg) => ({type:SHOW_ERROR_MSG,errorMsg})
 
 export const login = (username,password) =>{
     return async dispatch =>{
-        const result = await reqLogin(username,password);;
-        if(result.status === 0){
-            const user = result.data;
-            console.log(user)
+        const result = await reqLogin(username,password);
+        console.log(result);
+        if (result.data.success) {
+            const user = result.data.user;
             storageUtils.saveUser(user);
             dispatch(receiveUser(user));
         }else{
-            const msg = result.msg;
-            dispatch(showErrorMsg(msg));
+            dispatch(showErrorMsg("登录失败，请更换用户名或检查网络"));
         }
+    }
+}
+
+
+//style
+export const getStyleImg = (img) => ({
+    type: STYLE_IMG,
+    img
+});
+
+
+export const reqStyleImg = (img, config) => {
+    return async dispatch => {
+        const result = await reqImg1(img, config);
+        console.log(result);
+        dispatch(getStyleImg(result));
+    }
+}
+
+export const getUsers =  () => {
+
+}
+
+export const resetStyleImg = () => {
+    return {
+        type: RESET_STYLE_IMG
+    };
+}
+
+
+
+//face
+export const getFaceImg = (img) => ({
+    type: FACE_IMG,
+    img
+});
+
+
+export const reqFaceImg = (img, config) => {
+    return async dispatch => {
+        const result = await reqImg2(img, config);
+        console.log(result);
+        dispatch(getFaceImg(result));
+    }
+}
+
+export const resetFaceImg = () => {
+    return {
+        type: RESET_FACE_IMG
+    };
+}
+
+export const register = (username, password) => {
+    return async dispatch => {
+        const result = await reqRegister(username, password);
+        if (result.data.success) {
+            const user = result.data.user;
+            console.log(user)   
+            storageUtils.saveUser(user);
+            dispatch(receiveUser(user));
+        } else {
+            dispatch(showErrorMsg("注册失败，请更换用户名或检查网络"));
+        }
+        console.log(result);
     }
 }
 

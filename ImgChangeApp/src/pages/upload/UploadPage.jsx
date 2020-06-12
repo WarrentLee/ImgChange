@@ -31,7 +31,7 @@ export default class UploadPage extends Component{
              <div id="app">
                 <div className="app-root-container">
                    <UploadApp type='type1' from={data}/>
-                   <UploadApp type='type2' from={data}/>
+                   {/* <UploadApp type='type2' from={data}/> */}
                 </div>
              </div>
           </div>

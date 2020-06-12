@@ -8,18 +8,18 @@ from ImgChangeServer.database.model import UserModel
 api = Namespace('user', description='User related operations')
 
 register = reqparse.RequestParser()
-register.add_argument('username', required=True, location='form')
-register.add_argument('password', required=True, location='form')
+register.add_argument('username', required=True, location='json')
+register.add_argument('password', required=True, location='json')
 # register.add_argument('email', location='json')
 # register.add_argument('name', location='json')
 
 login = reqparse.RequestParser()
-login.add_argument('password', required=True, location='form')
-login.add_argument('username', required=True, location='form')
+login.add_argument('password', required=True, location='json')
+login.add_argument('username', required=True, location='json')
 
 set_password = reqparse.RequestParser()
-set_password.add_argument('old_password', required=True, location='form')
-set_password.add_argument('new_password', required=True, location='form')
+set_password.add_argument('old_password', required=True, location='json')
+set_password.add_argument('new_password', required=True, location='json')
 
 
 @api.route('/login')

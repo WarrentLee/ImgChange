@@ -1,7 +1,8 @@
 import { Redirect, Route, Switch } from 'react-router-dom'
 import Home from '../home/Home'
 import UserCenter from "../usercenter/UserCenter";
-import UploadPage from "../upload/UploadPage";
+import UploadFace from "../upload/UploadFace";
+import UploadStyle from "../upload/UploadStyle";
 import AndMore from '../andmore/AndMore';
 import HowTo from '../howto/HowTo';
 import Header from '../../component/header/Header'
@@ -21,7 +22,8 @@ export default class Admin extends Component{
                 <Route path='/home' component={Home} />
                 <Route path="/howto" component={HowTo} />
                 <Route path="/usercenter" component={UserCenter} />
-                <Route path="/upload" component={UploadPage} />
+                <Route path="/uploadface" component={UploadFace} />
+                <Route path="/uploadstyle" component={UploadStyle} />
                 <Route path="/andmore" component={AndMore} />
                 <Route path="/login" component={Login} />
                 <Route path="/try" component={Try} />
