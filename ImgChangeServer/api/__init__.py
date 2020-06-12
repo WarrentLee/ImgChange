@@ -11,7 +11,11 @@ from ImgChangeServer.api.image import api as ns_img
 from ImgChangeServer.api.change import api as ns_change
 from ImgChangeServer.config import Config
 
+
+if not os.path.exists(Config.DATABASE_DIRECTORY):
+    os.system(" python ../database/model.py")
 os.environ['DATABASE_URL'] = 'sqlite:///' + Config.DATABASE_DIRECTORY
+
 blueprint = Blueprint('api', __name__, url_prefix='/api')  # 创建一个falsk蓝图
 
 # 将蓝图生成api
@@ -35,4 +39,4 @@ login_manager.login_view = 'login'  # 设置用户登录视图函数 endpoint
 app.register_blueprint(blueprint)
 
 if __name__ == '__main__':  # 建立项目时选择了flask项目，此处不会直接执行这个py文件，而是递交给flask框架去执行
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0")

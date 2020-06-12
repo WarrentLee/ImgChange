@@ -42,7 +42,7 @@ class AnimeGAN(Resource):
         args = image_change.parse_args()
         as_attachment = args['asAttachment']
         image = args['image']
-        model_dir = os.path.abspath(os.path.dirname(os.getcwd())) + "/workbench/AnimeGAN/checkpoint/model"
+        model_dir = Config.AnimeGAN_MODEL_DIRECTORY
         try:
             pil_image = Image.open(image)
         except PIL.UnidentifiedImageError:
@@ -79,7 +79,7 @@ class FaceGAN(Resource):
         as_attachment = args['asAttachment']
         image_file = args['image']
         scale = args['scale']
-        model_dir = os.path.abspath(os.path.dirname(os.getcwd())) + "/workbench/WarpGAN/pretrained/warpgan_pretrained"
+        model_dir = Config.WarpGAN_MODEL_DIRECTORY
         try:
             face_img = process(model_dir, image_file, scale=scale)
         except PIL.UnidentifiedImageError:
