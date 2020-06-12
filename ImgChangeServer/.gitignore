@@ -4,10 +4,5 @@ __pycache__/
 *$py.class
 
 # Ignore in this directory
-checkpoint/model/
-result/
-results/
-vgg19_weight/*
-
-# Except this file
-!.gitignore
+dataset/
+database/data.db
