@@ -10,73 +10,83 @@ import { connect } from 'react-redux';
 import { setChooseType } from '../../redux/actions'
 
 
-function getBase64(file) {
-    return new Promise((resolve, reject) => {
+class UploadApp extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            imageSrc: uploadPicture,
+            file:null,
+            fileList: [],
+            returnImg: uploadPictureAfter
+        }
+    }
+
+    downloadImg = ()=> {
+        var img = document.getElementById('returnImg');
+        var url = img.src;
+        console.log(img);
+        var a = document.createElement('a');
+        var event = new MouseEvent('click');
+        a.download = '图片下载';
+        a.href = url;
+        a.dispatchEvent(event);
+    }
+
+
+    getBase64 = (file) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-    })
-}
-
-function downloadImg() {
-    var img = document.getElementById('returnImg');
-    var url = img.src;
-    console.log(img);
-    var a = document.createElement('a');
-    var event = new MouseEvent('click');
-    a.download = '图片下载';
-    a.href = url;
-    a.dispatchEvent(event);
-}
-
-class UploadApp extends Component {
+        reader.onload = (e) => {  
+        // reader.onerror = error => reject(error);
+        this.setState({
+            imageSrc: e.target.result ,
+        })
+        };
+    }
 
 
     uploadImage = async ({ file, fileList }) => {
-        var imgSrc;
         if(fileList.length === 0){
-            imgSrc= await getBase64(file.originFileObj);
+            this.getBase64(file.originFileObj) ;
         }else{
-            imgSrc = await getBase64(fileList[0].originFileObj);
+            this.getBase64(fileList[0].originFileObj);
         }
         this.setState({
-            imageSrc: imgSrc,
+            file,
             fileList: fileList,
         })
-        this.returnImage(this.props.type === 'type1' ? reqImg1 : reqImg2)
     }
 
-    returnImage = async (func) => {
-        console.log('a');
-        const result = await func(this.state.imageSrc);
-        const url = result.url;
-        // console.log(url);
-        this.setState({
-            returnImg: url
-        })
-        // console.log(this.state);
-    }
-
-    downloadImage = () => {
-        downloadImg();
-    }
-
-    state = {
-        imageSrc: uploadPicture,
-        fileList: [],
-        returnImg: uploadPictureAfter
-    }
+    // returnImage = async (func) => {
+    //     // console.log('a');
+    //     const result = await func(this.state.file);
+    //     // const url = result.url;
+    //     // // console.log(url);
+    //     // this.setState({
+    //     //     returnImg: url
+    //     // })
+    //     // // console.log(this.state);
+    // }
 
     uploadProps = (type) => {
+
+        const BASE = '';
         return {
-            name: 'files' + type,
-            action: () => { return type === 'type1' ? 'https://www.mocky.io/v2/5cc8019d300000980a055e76' :'https://www.mocky.io/v2/5cc8019d300000980a055e76'},
+            method:'POST',
+            action: type === 'type1' ? BASE + '/api/image/' : BASE + '/api/change/face',
             headers: {
-                authorization: 'authorization-text',
+            //     authorization: 'authorization-text',
+                // enctype: 'multipart/form-data',
+                'Content-Type':'multipart/form-data',
+                'accept':'application / json',
+            //     'Content-Type': ['image/jpeg', 'image/png']
+            //     // 'Content-Type': 'image/png', 
             },
-            accept: "image/jpeg,image/jpg,image/png,image/svg",
-            fileList:[]
+            listType: 'picture',
+            // accept: "image/jpg,image/png",
+            fileList: [],
+            // withCredentials: true
         }
     }
 
@@ -119,7 +129,7 @@ class UploadApp extends Component {
                     <div className="upload-img">
                         <img src={this.state.returnImg} alt="img" id="returnImg" style={{ width: '354px' }} />
                         <div className="upload-img-footer">
-                            <button className="button button-download" onClick={this.downloadImage.bind(this)}>
+                            <button className="button button-download" onClick={this.downloadImage}>
                                 下载
                             </button>
                         </div>

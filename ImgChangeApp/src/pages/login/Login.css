@@ -21,3 +21,14 @@
     background-color:#3f48cc !important;
     border:none !important;
 }
+
+.login span:hover{
+    color:#3f48cc !important;
+}
+
+.login .toggle{
+    display: block;
+    text-align: center;
+    position: relative;
+    top:15px;
+}

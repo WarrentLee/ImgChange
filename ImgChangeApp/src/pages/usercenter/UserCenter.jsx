@@ -1,32 +1,42 @@
 import React, { Component } from 'react'
 import './UserCenter.css';
-import { reqUser } from '../../api';
+import { reqUser, reqImgsId } from '../../api';
+import UserCenterLogined from './UserCenterLogined'
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Result, Button } from 'antd'
+
 class UserCenter extends Component{
-   getUsers = async (user)=>{
-      const result = await reqUser(user);
-      if (result.status === 0) {
-         const { users, roles } = result.data
-         this.initRoleNames(roles)
-         this.setState({
-            users,
-            roles
-         })
+   
+   constructor(props){
+      super(props);
+      this.state={
+         hasLogined: JSON.stringify(this.props.user) !== '{}'
       }
    }
 
+   // getLoginedOrNot = ()=>{
+   //   this.setState({
+   //      hasLogined: JSON.stringify(this.props.user) !== '{}'
+   //   })
+   // }
+
    render(){
-     return (
-        <div className="usercenter-page">
-           <div className="usercenter-header">
-              <div className="usercenter-title-wrap">
-                 <h1 className="usercenter-title">
-                    <span>用户中心</span>
-                 </h1>
-              </div>
-           </div>
-        </div>
-     )
+     if(this.state.hasLogined){
+        return <UserCenterLogined/>
+     }else{
+        return <Link to="login">
+           <Result
+              title="未登录，无法查看用户中心"
+               extra={
+                 <Button type="primary" key="console">
+                    前往登录
+                  </Button>
+                }
+           >
+           </Result>
+        </Link>
+     }
    }
 }
 

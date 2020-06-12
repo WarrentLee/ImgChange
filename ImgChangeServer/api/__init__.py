@@ -35,4 +35,4 @@ login_manager.login_view = 'login'  # 设置用户登录视图函数 endpoint
 app.register_blueprint(blueprint)
 
 if __name__ == '__main__':  # 建立项目时选择了flask项目，此处不会直接执行这个py文件，而是递交给flask框架去执行
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0",debug="True")
