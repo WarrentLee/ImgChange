@@ -1,3 +1,7 @@
+@import '~antd/dist/antd.css';
+
+
+
 .usercenter-page .usercenter-header{
     background: #fff;
     /* border-radius: 12px; */
@@ -13,19 +17,27 @@
     font-family: 'SourceHanSerif-2040446c601f2cf' !important;
 }
 
-.usercenter-page span {
-    display: inline;
-    font-size: 30px;
-}
+
 
 .usercenter-page button {
     font-size: 15px !important;
-    border: transparent none;
-    background-color: transparent;
+    line-height: 30px;
+    width: 70px;
+    color: #000;
+    border: none;
+    margin-left: 13%;
+    margin-top: 4%;
+    background-color: #ccc;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .05),
+    0 2px 3px 0 rgba(0, 0, 0, .1);
 }
 
-.usercenter-page button:active {
-    border: transparent none;
+.usercenter-page button:hover {
+    border: #3f48cc solid 1px;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, .05),
+        0 2px 3px 0 rgba(0, 0, 0, .1);
+    background-color:#3f48cc;
+    color: #fff;
 }
 
 .usercenter-page .usercenter-title-wrap{
@@ -35,10 +47,64 @@
 .usercenter-page img{
     padding: 5px;
     margin: 7px;
-    width: 250px;
+    width: 18vw;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .05),
     0 2px 3px 0 rgba(0, 0, 0, .1)
 }
+.usercenter-page .usercenter-history {
+    position: relative;
+}
 .usercenter-page .box {
+    margin-bottom: 80px;
+}
+
+.usercenter-page #pagination{
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+.usercenter-page .settings{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    background: #fff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .05),
+    0 2px 3px 0 rgba(0, 0, 0, .1);
+    max-width: 60%;
+    margin-top: 10px;
+    padding: 40px 40px 24px 40px;
+}
+
+
+.usercenter-page h2 {
+    text-align: left;
+}
+
+.usercenter-page .form-table{
+    width: 300px;
+    height: 350px;
+    margin-left: -40px;
+    margin-top: 20px;
+}
+
+.usercenter-page input{
+    border-radius: 0px;
+}
+
+@media only screen and (max-width:575px) {
+    .usercenter-page img {
+        padding: 5px;
+        margin: 7px;
+        width: 20vw;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, .05),
+            0 2px 3px 0 rgba(0, 0, 0, .1)
+    }
+    .usercenter-page .form-table {
+        width: 300px;
+        height: 350px;
+        padding:40px 20px 0px 20px
+    }
+    .usercenter-page .form-table  .ant-input-password{
+        width:180px !important;
+    }
 }

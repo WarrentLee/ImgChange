@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import './UserCenter.css';
-import { reqUser, reqImgsId } from '../../api';
 import UserCenterLogined from './UserCenterLogined'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Result, Button } from 'antd'
+import { Result } from 'antd'
 
 class UserCenter extends Component{
    
@@ -28,11 +27,6 @@ class UserCenter extends Component{
         return <Link to="login">
            <Result
               title="未登录，无法查看用户中心"
-               extra={
-                 <Button type="primary" key="console">
-                    前往登录
-                  </Button>
-                }
            >
            </Result>
         </Link>

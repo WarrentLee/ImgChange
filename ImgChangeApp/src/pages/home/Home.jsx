@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import './Home.css';
+import './Home.less';
 import first_img_before from '../../assets/images/first_img_before.jpg'
 import first_img_after from '../../assets/images/first_img_after.jpg'
 import second_img_before from '../../assets/images/second_img_before.jpg'
@@ -37,12 +37,12 @@ class Home extends Component {
                         </div>
                      </div>
                      <div className="caption">
-                        <h2>风景风格转移</h2>
+                        <h2>风格转移</h2>
                      </div>
                   </Link>
                </div>
                <div className="point">
-                  <Link to="upload">
+                  <Link to="uploadstyle">
                      <img src={third_img} alt="上传图片" />
                      <div className="caption">
                         <h2>上传图片</h2>

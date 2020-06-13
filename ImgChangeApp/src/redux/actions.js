@@ -6,7 +6,8 @@ import {
     STYLE_IMG,
     RESET_STYLE_IMG,
     FACE_IMG,
-    RESET_FACE_IMG
+    RESET_FACE_IMG,
+    CANT_FOUND_FACE
 } from './action-types'
 import {
     reqLogin,
@@ -14,8 +15,6 @@ import {
     reqLogout,
     reqImg1,
     reqImg2,
-    reqUserImg,
-    reqImgById
 } from '../api'
 import storageUtils from '../utils/storageUtils'
 
@@ -51,6 +50,9 @@ export const login = (username,password) =>{
         }
     }
 }
+
+
+
 
 
 //style
@@ -90,9 +92,18 @@ export const getFaceImg = (img) => ({
 export const reqFaceImg = (img, config) => {
     return async dispatch => {
         const result = await reqImg2(img, config);
-        console.log(result);
+        if(result.status===202){
+            dispatch(CantFoundFace('notfound'))
+            return;
+        }
         dispatch(getFaceImg(result));
     }
+}
+
+export const CantFoundFace = (msg) => {
+    return {
+        type: CANT_FOUND_FACE, msg
+    };
 }
 
 export const resetFaceImg = () => {

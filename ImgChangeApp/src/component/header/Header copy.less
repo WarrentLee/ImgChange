@@ -1,0 +1,123 @@
+.header {
+    height: 55px;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .05),
+    0 2px 3px 0 rgba(0, 0, 0, .1);
+    top: 0;
+    z-index: 1030;
+}
+
+.header a {
+    text-decoration: none;
+    color: #71777c;
+}
+
+
+.header h1 {
+display: block;
+margin: 0 0 0 12%;
+
+img {
+    width: 40px;
+    height: 40px;
+}
+
+#logo {
+    color: #000;
+    display: inline;
+    line-height: 55px;
+}
+}
+
+@media only screen and (min-width:1044px) {
+    .header .header-right {
+        display: flex;
+        margin-right: 12%;
+        height: 55px;
+
+        .header-right-link li {
+            display: inline;
+            line-height: 55px;
+            padding: 0 15px 0 15px;
+        }
+
+        #menu {
+            display:none;
+            margin: auto;
+            align-items: center;
+        }
+    }
+}
+
+@media only screen and (max-width:1044px) {
+    .header .header-right {
+        display: flex;
+        height: 55px;
+
+        .header-right-link li {
+            display: none;
+            line-height: 55px;
+            padding: 0 15px 0 15px;
+        }
+
+        #menu {
+            align-items: center;
+        }
+    }
+}
+
+@media only screen and (max-width:900px) {
+    .header h1 {
+        display: block;
+        margin: 0 0 0 12%;
+
+        img {
+            display: none;
+        }
+
+        #logo {
+            color: #000;
+            display: inline;
+            line-height: 55px;
+            font-size: 20px;
+        }
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .header .header-right {
+        display: flex;
+        margin-right: 12%;
+        height: 55px;
+
+        .header-right-link li {
+            display: none;
+            line-height: 55px;
+            padding: 0 15px 0 15px;
+        }
+
+        #menu {
+            margin: auto;
+            align-items: center;
+        }
+    }
+
+    .header h1 {
+        display: block;
+        margin: 0 0 0 12%;
+
+        img {
+            display: none;
+        }
+
+        #logo {
+            color: #000;
+            display: inline;
+            line-height: 55px;
+            font-size: 20px;
+        }
+    }
+}

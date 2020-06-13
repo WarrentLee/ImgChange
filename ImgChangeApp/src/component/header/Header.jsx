@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
-import './Header.css';
-import { Link, withRouter, Redirect} from 'react-router-dom';
+import './Header copy.less';
+import { Link, withRouter } from 'react-router-dom';
 import logo from '../../assets/images/logo.png'
-import {logout} from '../../redux/actions'
-import {connect} from 'react-redux'
-import { Modal } from 'antd';
-class Header extends Component {4
+import { logout } from '../../redux/actions'
+import { connect } from 'react-redux'
+import { Modal, Menu } from 'antd';
+import { UnorderedListOutlined } from '@ant-design/icons'
+
+const { SubMenu } = Menu;
+
+class Header extends Component {
+   4
 
    // constructor(){
    //    super();
@@ -14,13 +19,27 @@ class Header extends Component {4
    //    }
    // }
 
-   showUser = () => {
-      console.log(this.props.user);
+   showUser1 = () => {
       if (JSON.stringify(this.props.user) !== '{}') {
          return (
             <>
-               <Link to="/usercenter"><span>个人中心</span></Link>
-            <span onClick={this.logoutConfirm}>退出</span>
+               <span onClick={this.logoutConfirm}>退出</span>
+            </>
+         )
+      } else {
+         return <Link to='/login' id="login" >登录</Link>
+      }
+   }
+   showUser2 = () => {
+      if (JSON.stringify(this.props.user) !== '{}') {
+         return (
+            <>
+               <li>
+                  <Link to='/usercenter' id="usercenter" >个人中心</Link>
+               </li>
+               <li>
+                  <span onClick={this.logoutConfirm}>退出</span>
+               </li>
             </>
          )
       } else {
@@ -48,13 +67,13 @@ class Header extends Component {4
    //    });
    // };
 
-   logoutConfirm = ()=>{
+   logoutConfirm = () => {
       Modal.confirm({
-         content:'确定要退出吗?',
-         onOk:()=>{
+         content: '确定要退出吗?',
+         onOk: () => {
             this.props.logout();
             this.props.history.push({
-               pathname:'/home'
+               pathname: '/home'
             })
          }
       });
@@ -63,9 +82,9 @@ class Header extends Component {4
       return (
          <header className="header" style={{ width: '100%' }}>
             <h1 className="header-logo">
-               <Link to='/' id="link">
-                  <img src={logo} alt="logo" />
-               &nbsp;Decima
+               <img src={logo} alt="logo" />
+               <Link to='/' id="logo">
+                  &nbsp;Decima
             </Link>
             </h1>
             <div className="header-right">
@@ -82,7 +101,7 @@ class Header extends Component {4
                   </li>
                   <li>
                      <Link to='/home'>
-                       主页
+                        主页
                      </Link>
                   </li>
                   {/* <li>
@@ -100,10 +119,43 @@ class Header extends Component {4
                         了解更多
                      </Link>
                   </li>
-                  <li>
-                     {this.showUser()}
-                  </li> 
+                     {this.showUser2()}
                </ul>
+               <Menu id="menu">
+                  <SubMenu icon={<UnorderedListOutlined />} mode="horizontal">
+                     <Menu.ItemGroup title="应用">
+                        <Menu.Item key="uploadface">
+                           <Link to='/uploadface'>
+                              人脸漫画
+                           </Link>
+                        </Menu.Item>
+                        <Menu.Item key="uploadstyle">
+                           <Link to='/uploadstyle'>
+                              风格转移
+                           </Link>
+                        </Menu.Item>
+                        <Menu.Item key="home">
+                           <Link to='/home'>
+                              主页
+                           </Link>
+                        </Menu.Item>
+                        <Menu.Item key="howto">
+                           <Link to='/howto'>
+                              使用方法
+                           </Link>
+                        </Menu.Item>
+                        <  Menu.Item key="andmore">
+                           <Link to='/andmore'>
+                              了解更多
+                           </Link>
+                        </Menu.Item>
+                     </Menu.ItemGroup>
+                     <Menu.ItemGroup title="个人">
+                        <Menu.Item key="usercenter"><Link to="/usercenter">个人中心</Link></Menu.Item>
+                        <Menu.Item key="handle">{this.showUser1()}</Menu.Item>
+                     </Menu.ItemGroup>
+                  </SubMenu>
+               </Menu>
             </div>
          </header>
       )

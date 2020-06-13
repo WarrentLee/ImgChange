@@ -16,3 +16,9 @@
 .footer em {
     color: #969696
 }
+
+@media only screen and (max-width:600px) {
+    .footer{
+        display: none;
+    }
+}

@@ -6,4 +6,5 @@ export const STYLE_IMG = 'style_img'
 export const RESET_STYLE_IMG = 'reset_style_img'
 
 export const FACE_IMG = 'face_img'
+export const CANT_FOUND_FACE = 'cant_found_face'
 export const RESET_FACE_IMG = 'reset_face_img'

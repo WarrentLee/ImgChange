@@ -23,20 +23,6 @@
     padding-left: 40px;
     overflow: hidden;
     font-size: 21px;
-    font-family: Avenir,
-    -apple-system,
-    BlinkMacSystemFont,
-    segoe ui,
-    Roboto,
-    helvetica neue,
-    Arial,
-    noto sans,
-    sans-serif,
-    apple color emoji,
-    segoe ui emoji,
-    segoe ui symbol,
-    noto color emoji,
-    sans-serif;
     white-space: nowrap;
     text-decoration: none;
     /* text-decoration: none;
@@ -55,17 +41,18 @@
     margin-right: 13%;
 }
 .header span {
-    margin-right: 20px;
+    margin-right: 15px;
 }
 .header .header-right-link {
     display: flex;
 }
 .header li {
+    display: inline-block;
     color:#71777c;
     list-style: none;
     margin-right: 30px;
-    font-weight: bold;
     font-size: 15px;
+    margin-top: 20px;
 }
 .header #login {
     color:#3f48cc;

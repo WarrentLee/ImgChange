@@ -1,34 +1,112 @@
 @import '~antd/dist/antd.css';
 
 .login{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
+    width: 300px;
+    height: 400px;
 }
-.login-content{
+
+
+.login-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     height: 300px;
     width: 400px;
     background: #fff;
-    box-shadow: 2px 8px 16px 5px #cccccc;
-    border-radius: 12px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .05),
+        0 2px 3px 0 rgba(0, 0, 0, .1);
     box-sizing: border-box;
-    margin:10% 18.5% auto 18.5%;
     padding: 40px 40px 24px 40px;
 }
-.login Button{
-    width: 100%;
-    background-color:#3f48cc !important;
-    border:none !important;
-}
 
-.login span:hover{
-    color:#3f48cc !important;
-}
-
-.login .toggle{
+.login Button {
     display: block;
-    text-align: center;
-    position: relative;
-    top:15px;
+    margin: 0 auto;
+    font-size: 15px !important;
+    line-height: 30px;
+    width: 70px;
+    color: #000;
+    border-radius: 0;
+    border: 0;
+    background-color: #ccc;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .05),
+        0 2px 3px 0 rgba(0, 0, 0, .1);
+    transition: none;
 }
+
+.login Button:hover {
+    border: #3f48cc solid 1px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .05),
+        0 2px 3px 0 rgba(0, 0, 0, .1);
+    background-color: #3f48cc;
+    color: #fff;
+    transition: none;
+}
+
+.login .loginandtoggle{
+    text-align: center;
+}
+
+.login .toggle {
+    display: block;
+    margin: 0 auto;
+}
+
+
+/* 
+.login {
+    max-height: 100vh;
+}
+
+.login-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 300px;
+    width: 400px;
+    background: #fff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .05),
+        0 2px 3px 0 rgba(0, 0, 0, .1);
+    box-sizing: border-box;
+    padding: 40px 40px 24px 40px;
+}
+
+.h2 {
+    margin: 0 auto;
+}
+
+.login .ant-col {
+    width: 100%;
+}
+
+.login Button {
+    font-size: 15px !important;
+    line-height: 30px;
+    width: 70px;
+    color: #000;
+    border-radius: 0;
+    border: 0;
+    background-color: #ccc;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .05),
+        0 2px 3px 0 rgba(0, 0, 0, .1);
+    transition: none;
+}
+
+.login Button:hover {
+    border: #3f48cc solid 1px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .05),
+        0 2px 3px 0 rgba(0, 0, 0, .1);
+    background-color: #3f48cc;
+    color: #fff;
+    transition: none;
+}
+
+.login .toggle {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 10px;
+}
+
+*/

@@ -1,9 +1,5 @@
-import {
-    message
-} from 'antd'
 import ajax from './ajax'
 import axios from 'axios'
-import second from '../assets/images/logo.png'
 
 const BASE = ''
 
@@ -17,11 +13,17 @@ export const reqLogin = (username, password) => ajax(BASE + '/api/user/login', {
     password
 }, 'POST')
 
-//用户中心请求图片ID
-// export const reqUserImg = () => ajax(BASE + '/api/image/', {}, 'GET')
+export const upOriginImg = (img,config) =>axios.post(BASE+'/api/image/',img,config)
+//  ajax(BASE + '/api/image/', {image:img}, 'POST',config)
 
 //
 // export const reqImgById = (id) => ajax(BASE + `/api/image/${id}`, {id}, 'GET')
+
+//修改密码
+export const changePassword = (old_password, new_password) => axios.post(BASE + '/api/user/password', {
+    old_password,
+    new_password
+})
 
 
 //请求注销
@@ -34,7 +36,7 @@ export const reqImg1 = (img, config) => axios.post(
     BASE + '/api/change/style', img, config
 ).then((response) => {
     var data = response.data;
-    console.log(response);
+    // console.log(response);
     let u8a = new Uint8Array(data).reduce((data, byte) => data + String.fromCharCode(byte), '');
     let src = `data:image/png;base64, ${ btoa(u8a) }`;
     return src;
@@ -44,7 +46,9 @@ export const reqImg2 = (img, config) => axios.post(
     BASE + '/api/change/face', img, config
 ).then((response) => {
     var data = response.data;
-    console.log(response);
+    if(response.status === 202){
+        return response;
+    }
     let u8a = new Uint8Array(data).reduce((data, byte) => data + String.fromCharCode(byte), '');
     let src = `data:image/png;base64, ${ btoa(u8a) }`;
     return src;

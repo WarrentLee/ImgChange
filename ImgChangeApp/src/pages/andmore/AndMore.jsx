@@ -13,12 +13,12 @@ export default class AndMore extends Component{
               <div className="detail-content-wrap">
                  <div className="detail-content">
                     <div>
-                       <div class="cl-preview-section">
+                       <div className="cl-preview-section">
                           <h1>制作团队</h1>
                        </div>
-                       <div class="cl-preview-section"><p></p>
+                       <div className="cl-preview-section"><p></p>
                        </div>
-                       <div class="cl-preview-section"><p><br /><img src="https://torgor.github.io/styles/images/jmm/jvm-heap-oop-structure.png" alt="jvm-heap-oop-structure.png" data-original="https://torgor.github.io/styles/images/jmm/jvm-heap-oop-structure.png" class="" style={{ cursor: 'pointer', display: 'block' }} /></p>
+                       <div className="cl-preview-section"><p><br /><img src="https://torgor.github.io/styles/images/jmm/jvm-heap-oop-structure.png" alt="jvm-heap-oop-structure.png" data-original="https://torgor.github.io/styles/images/jmm/jvm-heap-oop-structure.png" className="" style={{ cursor: 'pointer', display: 'block' }} /></p>
                        </div>
                     </div>
                  </div>

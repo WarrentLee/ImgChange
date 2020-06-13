@@ -8,7 +8,6 @@ import HowTo from '../howto/HowTo';
 import Header from '../../component/header/Header'
 import Footer from '../../component/footer/Footer'
 import Login from '../login/Login'
-import Try from '../try/Try'
 
 import React, { Component } from 'react'
 
@@ -26,7 +25,6 @@ export default class Admin extends Component{
                 <Route path="/uploadstyle" component={UploadStyle} />
                 <Route path="/andmore" component={AndMore} />
                 <Route path="/login" component={Login} />
-                <Route path="/try" component={Try} />
             </Switch>
             <Footer/>
         </div>

@@ -10,7 +10,8 @@ import {
     STYLE_IMG,
     RESET_STYLE_IMG,
     FACE_IMG,
-    RESET_FACE_IMG
+    RESET_FACE_IMG,
+    CANT_FOUND_FACE
 } from './action-types'
 
 const initUser = storageUtils.getUser();
@@ -57,10 +58,11 @@ function styleImg(state = initImg, action) {
 function faceImg(state = initImg, action) {
     switch (action.type) {
         case FACE_IMG:
-            console.log('reducer' + action.img);
             return action.img;
         case RESET_FACE_IMG:
             return ''
+        case CANT_FOUND_FACE:
+            return action.msg
         default:
             return state;
     }

@@ -1,0 +1,126 @@
+#home-page{
+}
+#home-page .headline {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    padding: 20px 10px;
+    display: flex;
+}
+#home-page .headline .point {
+    cursor: pointer;
+    position: relative;
+    flex-grow: 0;
+    margin: 10px;
+    width: 250px;
+    background-color: white;
+}
+#home-page .headline .point img {
+    width: 250px;
+    height: 179px;
+    border-radius: 2px;
+    box-shadow: 2px 2px 8px 2px #dddddd;
+}
+.index_page__slideMask2 {
+    position: relative;
+}
+
+.index_page__slidImag1{
+    position: absolute;
+    top:0;
+    width: 100%;
+}
+h2{
+    text-align: center;
+}
+#history{
+    /* display: none; */
+}
+
+
+@media only screen and (max-width:1100px) {
+   
+    #home-page .headline .point {
+        cursor: pointer;
+        position: relative;
+        margin: 10px;
+        width: 200px;
+        background-color: white;
+    }
+
+    #home-page .headline .point img {
+        width: 200px;
+        height: 144px;
+        border-radius: 2px;
+        box-shadow: 2px 2px 8px 2px #dddddd;
+    }
+}
+
+
+// @media only screen and (max-width:900px) {
+//     #home-page .headline {
+//         display: flex;
+//         flex-wrap: wrap;
+//         justify-content: center;
+//     }
+//     #home-page .headline .point {
+//         cursor: pointer;
+//         position: relative;
+//         margin: 10px;
+//         width: 153px;
+//         h2{
+//             font-size: 2vw;
+//         }
+//     }
+
+//     #home-page .headline .point img {
+//         width: 153px;
+//         height: 110px;
+//         border-radius: 2px;
+//         box-shadow: 0 0 0 1px rgba(0, 0, 0, .05),
+//         0 2px 3px 0 rgba(0, 0, 0, .1);
+//     }
+// }
+
+@media only screen and (max-width:900px) {
+    #home-page .headline {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #home-page .headline .point {
+        margin: 10px;
+        width: 160px;
+    }
+
+    #home-page .headline .point img {
+        width: 160px;
+        height: 115.2px;
+         box-shadow: 0 0 0 1px rgba(0, 0, 0, .05),
+                 0 2px 3px 0 rgba(0, 0, 0, .1);
+        border-radius: 2px;
+    }
+}
+
+@media only screen and (max-width:760px) {
+    #home-page .headline {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #home-page .headline .point {
+        margin: 10px;
+        width: 140px;
+        h2{
+            font-size: 13px;
+        }
+    }
+
+    #home-page .headline .point img {
+        width: 140px;
+        height: 100.8px;
+    }
+}
